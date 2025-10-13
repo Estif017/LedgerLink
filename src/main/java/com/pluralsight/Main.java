@@ -17,6 +17,8 @@ public class Main {
                     break;
                 case 'P':
                 case 'p':
+                    Diposits.makePayment();
+                    break;
                 case 'L':
                 case 'l':
                     Ledger.legerOperation();

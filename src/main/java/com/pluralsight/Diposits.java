@@ -22,13 +22,39 @@ public class Diposits {
         scanner.nextLine();
         Transaction transaction = new Transaction(LocalDate.now(), LocalTime.now(),discription,vendor,amount);
         depositList.add(0,transaction);
-        File fileLocation = new File("src/main/resources/transactions.csv");
-        writeFile(String.valueOf(fileLocation),transaction);
-        System.out.println("Successfully added the product!!!");
+        writeFile(transaction);
     }
 
-    public static void writeFile(String fileLocation, Transaction transaction){
+    public static void makePayment(){
+        ArrayList<Transaction> transactions = new ArrayList<>();
+        System.out.print("what is the payment for? ");
+        String desctiption = scanner.nextLine();
+        System.out.print("Who is being paid? ");
+        String vendor = scanner.nextLine();
+        System.out.print("How much is being paid? (please enter a negative amount) ");
+        double amount = scanner.nextDouble();
+        boolean amountValidation;
+        if(amount>0){
+            amountValidation = false;
+            while (!amountValidation){
+                System.out.println("Debt can't be a postive number please enter a negative amount");
+                System.out.print("How much is being paid? (please enter a negative amount) ");
+                 amount = scanner.nextDouble();
+                 if(amount<0){
+                     amountValidation=true;
+                 }
+            }
+        }
+        scanner.nextLine();
+        Transaction transaction = new Transaction(LocalDate.now(), LocalTime.now(),desctiption,vendor,amount);
+        transactions.add(0,transaction);
+        writeFile(transaction);
+
+    }
+
+    public static void writeFile( Transaction transaction){
         try {
+            File fileLocation = new File("src/main/resources/transactions.csv");
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileLocation,true));
             DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
             String line = String.format("%s|%s|%s|%s|%.2f",transaction.getDate(),
@@ -39,6 +65,7 @@ public class Diposits {
             writer.write(line);
             writer.newLine();
             writer.close();
+            System.out.println("Successfully added to the Transaction record!!!");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
