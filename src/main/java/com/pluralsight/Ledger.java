@@ -18,22 +18,34 @@ public class Ledger {
             case 'a':
             case 'A':
                 listAllTransactions();
-            case'd':
+                break;
+            case 'd':
             case 'D':
                 listAllDeposits();
+                break;
             case 'p':
-            case'P':
+            case 'P':
                 listAllPayments();
+                break;
+            case 'r':
+            case 'R':
+                Reports.reportsOperation();
+                break;
+            case 'h':
+            case 'H':
+                HomeScreen.showHomeScreen();
+                break;
+            default:
+                System.out.println("You entered a wrong input!");
+                break;
         }
     }
 
     public static void listAllTransactions(){
-
         List<Transaction>transactions = readTransactionCsv();
         for(Transaction transaction:transactions){
             System.out.println(transaction);
         }
-
     }
 
     public static void listAllDeposits(){

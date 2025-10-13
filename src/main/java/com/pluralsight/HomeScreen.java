@@ -36,6 +36,7 @@ public class HomeScreen {
         System.out.print("Enter your option: ");
     }
 
+
     public static void reportsMenu(){
         final String BOLD = "\u001B[1m";
         final String RESET = "\u001B[0m";
