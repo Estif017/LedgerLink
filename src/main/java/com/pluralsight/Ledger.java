@@ -18,6 +18,12 @@ public class Ledger {
             case 'a':
             case 'A':
                 listAllTransactions();
+            case'd':
+            case 'D':
+                listAllDeposits();
+            case 'p':
+            case'P':
+                listAllPayments();
         }
     }
 
@@ -28,6 +34,24 @@ public class Ledger {
             System.out.println(transaction);
         }
 
+    }
+
+    public static void listAllDeposits(){
+        List<Transaction>transactions = readTransactionCsv();
+        for(Transaction transaction:transactions){
+            if(transaction.getAmount()>0){
+                System.out.println(transaction);
+            }
+        }
+    }
+
+    public static void listAllPayments(){
+        List<Transaction>transactions = readTransactionCsv();
+        for(Transaction transaction:transactions){
+            if(transaction.getAmount()<0){
+                System.out.println(transaction);
+            }
+        }
     }
 
     public static List<Transaction> readTransactionCsv(){

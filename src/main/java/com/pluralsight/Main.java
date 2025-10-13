@@ -24,7 +24,9 @@ public class Main {
                     Ledger.legerOperation();
                     break;
                 case'X':
+                case'x':
                     running=false;
+                    System.out.println("Thank you for using LedgerLink, Good bye!!! ");
                     break;
                 default:
                     System.out.println("You entered a wrong input!");
