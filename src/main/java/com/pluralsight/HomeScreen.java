@@ -48,6 +48,8 @@ public class HomeScreen {
         System.out.println(BOLD + "3)" + RESET + " Year To Date");
         System.out.println(BOLD + "4)" + RESET + " Previous Year");
         System.out.println(BOLD + "5)" + RESET + " Search by Vendor");
+        System.out.println(BOLD + "6)" + RESET + " Custom search");
+        System.out.println(BOLD + "7)" + RESET + " Search by Amount");
         System.out.println(BOLD + "0)" + RESET + " Back");
         System.out.print("Enter your option: ");
     }

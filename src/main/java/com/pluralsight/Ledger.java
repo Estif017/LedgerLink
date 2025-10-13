@@ -46,6 +46,7 @@ public class Ledger {
         for(Transaction transaction:transactions){
             System.out.println(transaction);
         }
+        legerOperation();
     }
 
     public static void listAllDeposits(){
@@ -55,6 +56,7 @@ public class Ledger {
                 System.out.println(transaction);
             }
         }
+        legerOperation();
     }
 
     public static void listAllPayments(){
@@ -64,6 +66,7 @@ public class Ledger {
                 System.out.println(transaction);
             }
         }
+        legerOperation();
     }
 
     public static List<Transaction> readTransactionCsv(){
