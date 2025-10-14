@@ -33,6 +33,7 @@ public class HomeScreen {
         System.out.println(BOLD + "P)" + RESET + " Payments");
         System.out.println(BOLD + "R)" + RESET + " Report");
         System.out.println(BOLD + "H)" + RESET + " Home");
+        System.out.println(BOLD + "X)" + RESET + " Exit");
         System.out.print("Enter your option: ");
     }
 

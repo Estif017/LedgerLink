@@ -24,7 +24,6 @@ public class Reports {
                 }
             }
 
-//            scanner.nextLine();
             switch (reportsOperation){
                 case 0:
                     Ledger.legerOperation();

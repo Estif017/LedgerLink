@@ -12,28 +12,20 @@ public class Main {
         boolean running = true;
         while(running){
             HomeScreen.showHomeScreen();
-            char option = scanner.next().charAt(0);
+            String input = scanner.nextLine().trim();
+            MainMenuOptions option = MainMenuOptions.fromString(input);
+            if(option==null){
+                System.out.println("Invalid option. Please try again!");
+                continue;
+            }
             switch (option){
-                case 'D':
-                case 'd':
-                    Diposits.AddDeposit();
-                    break;
-                case 'P':
-                case 'p':
-                    Diposits.makePayment();
-                    break;
-                case 'L':
-                case 'l':
-                    Ledger.legerOperation();
-                    break;
-                case'X':
-                case'x':
-                    running=false;
-                    System.out.println("Thank you for using LedgerLink, Good bye!!! ");
-                    break;
-                default:
-                    System.out.println("You entered a wrong input!");
-                    break;
+                case DEPOSIT -> Diposits.AddDeposit();
+                case PAYMENT -> Diposits.makePayment();
+                case LEDGER -> Ledger.legerOperation();
+                case EXIT -> {
+                    running = false;
+                    System.out.println("Thank you for using LedgerLink, Good bye!!!");
+                }
             }
         }
     }

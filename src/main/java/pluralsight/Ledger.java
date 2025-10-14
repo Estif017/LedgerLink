@@ -16,36 +16,24 @@ public class Ledger {
         while (running){
             HomeScreen.ledgerMenu();
             System.out.println("Which ledger would you like to view?");
-            char legerOption = scanner.next().charAt(0);
-            switch (legerOption){
-                case 'a':
-                case 'A':
-                    listAllTransactions();
-                    break;
-                case 'd':
-                case 'D':
-                    listAllDeposits();
-                    break;
-                case 'p':
-                case 'P':
-                    listAllPayments();
-                    break;
-                case 'r':
-                case 'R':
-                    Reports.reportsOperation();
-                    break;
-                case 'h':
-                case 'H':
-                    Main.mainMenu();
-                    break;
-                case'X':
-                case'x':
-                    running=false;
-                    System.out.println("Thank you for using LedgerLink, Good bye!!! ");
-                    break;
-                default:
-                    System.out.println("You entered a wrong input!");
-                    break;
+            String input = scanner.nextLine().trim();
+            LegerMenuOptions options = LegerMenuOptions.fromString(input);
+
+            if(options==null){
+                System.out.println("Invalid option. Please try again!");
+                continue;
+            }
+            switch (options){
+                case ALL -> listAllTransactions();
+                case DEPOSITS -> listAllDeposits();
+                case PAYMENTS -> listAllPayments();
+                case REPORT -> Reports.reportsOperation();
+                case HOME -> Main.mainMenu();
+                case EXIT -> {
+                    running = false;
+                    System.out.println("Thank you for using LedgerLink, Good bye!!!");
+                }
+
             }
         }
     }
