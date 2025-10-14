@@ -1,4 +1,4 @@
-package com.pluralsight;
+package pluralsight;
 
 public class HomeScreen {
 

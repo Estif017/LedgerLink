@@ -1,4 +1,4 @@
-package com.pluralsight;
+package pluralsight;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -8,43 +8,62 @@ public class Reports {
     LocalDate today = LocalDate.now();
     static Scanner scanner= new Scanner(System.in);
     public static void reportsOperation(){
-        HomeScreen.reportsMenu();
-        System.out.println("Which report would you like to view?");
-        int reportsOperation = scanner.nextInt();
-        scanner.nextLine();
-        switch (reportsOperation){
-            case 0:
-                HomeScreen.ledgerMenu();
-                break;
-            case 1:
-                monthToDate("2025-10");
-                break;
-            case 2:
-                monthToDate("2025-09");
-                break;
-            case 3:
-                monthToDate("2025");
-                break;
-            case 4:
-                monthToDate("2024");
-                break;
-            case 5:
-                searchByVendor();
-                break;
-            case 6:
-                customSearch();
-                break;
-            case 7:
-                searchByAmount();
-                break;
-            default:
-                System.out.println("You entered a wrong input!");
-                break;
+        boolean running = true;
+        while (running){
+            int reportsOperation = 0;
+
+            while (true){
+                HomeScreen.reportsMenu();
+                System.out.println("Which report would you like to view?");
+                String input = scanner.nextLine();
+                try {
+                    reportsOperation = Integer.parseInt(input);
+                    break;
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid number! Please enter a valid number (1-10)");
+                }
+            }
+
+//            scanner.nextLine();
+            switch (reportsOperation){
+                case 0:
+                    Ledger.legerOperation();
+                    break;
+                case 1:
+                    monthToDate("2025-10");
+                    break;
+                case 2:
+                    monthToDate("2025-09");
+                    break;
+                case 3:
+                    monthToDate("2025");
+                    break;
+                case 4:
+                    monthToDate("2024");
+                    break;
+                case 5:
+                    searchByVendor();
+                    break;
+                case 6:
+                    customSearch();
+                    break;
+                case 7:
+                    searchByAmount();
+                    break;
+                case 9:
+                    running=false;
+                    System.out.println("Thank you for using LedgerLink, Good bye!!! ");
+                    break;
+                default:
+                    System.out.println("You entered a wrong input!");
+                    break;
+            }
         }
     }
 
     public static void monthToDate(String date){
         List<Transaction> transactions = Ledger.readTransactionCsv();
+        System.out.println(Transaction.header());
         for(Transaction transaction:transactions){
             if(transaction.getDate().toString().startsWith(date)){
                 System.out.println(transaction);
@@ -57,6 +76,7 @@ public class Reports {
         System.out.println("Please enter the vendor name");
         String vendor = scanner.nextLine();
         List<Transaction> transactions = Ledger.readTransactionCsv();
+        System.out.println(Transaction.header());
         int counter= 0;
         for(Transaction transaction:transactions){
             if(transaction.getVendor().toLowerCase().startsWith(vendor)){
@@ -74,6 +94,7 @@ public class Reports {
         System.out.println("Please enter the key word");
         String keyword = scanner.nextLine();
         List<Transaction> transactions = Ledger.readTransactionCsv();
+        System.out.println(Transaction.header());
         int counter= 0;
         for(Transaction transaction:transactions){
             if(transaction.getVendor().trim().toLowerCase().contains(keyword) || transaction.getDescription().trim().toLowerCase().contains(keyword)||transaction.getDate().toString().trim().toLowerCase().contains(keyword)){
@@ -107,6 +128,7 @@ public class Reports {
         }
 
         System.out.println("\n--- Filtered Transactions by Amount ---");
+        System.out.println(Transaction.header());
 
         for(Transaction transaction : transactions){
             boolean withinMin = (minimum==null || transaction.getAmount()>=minimum);

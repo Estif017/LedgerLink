@@ -1,11 +1,14 @@
-package com.pluralsight;
+package pluralsight;
 
 import java.util.Scanner;
 
 public class Main {
+    static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         HomeScreen.welcomeMessage();
+        mainMenu();
+    }
+    public static void mainMenu(){
         boolean running = true;
         while(running){
             HomeScreen.showHomeScreen();
@@ -13,7 +16,7 @@ public class Main {
             switch (option){
                 case 'D':
                 case 'd':
-                    Diposits.AddDiposit();
+                    Diposits.AddDeposit();
                     break;
                 case 'P':
                 case 'p':

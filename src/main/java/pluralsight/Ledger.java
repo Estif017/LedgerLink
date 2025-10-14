@@ -1,4 +1,4 @@
-package com.pluralsight;
+package pluralsight;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -11,38 +11,48 @@ import java.util.Scanner;
 public class Ledger {
     static Scanner scanner= new Scanner(System.in);
     public static void legerOperation(){
-        HomeScreen.ledgerMenu();
-        System.out.println("Which ledger would you like to view?");
-        char leagerOption = scanner.next().charAt(0);
-        switch (leagerOption){
-            case 'a':
-            case 'A':
-                listAllTransactions();
-                break;
-            case 'd':
-            case 'D':
-                listAllDeposits();
-                break;
-            case 'p':
-            case 'P':
-                listAllPayments();
-                break;
-            case 'r':
-            case 'R':
-                Reports.reportsOperation();
-                break;
-            case 'h':
-            case 'H':
-                HomeScreen.showHomeScreen();
-                break;
-            default:
-                System.out.println("You entered a wrong input!");
-                break;
+
+        boolean running = true;
+        while (running){
+            HomeScreen.ledgerMenu();
+            System.out.println("Which ledger would you like to view?");
+            char legerOption = scanner.next().charAt(0);
+            switch (legerOption){
+                case 'a':
+                case 'A':
+                    listAllTransactions();
+                    break;
+                case 'd':
+                case 'D':
+                    listAllDeposits();
+                    break;
+                case 'p':
+                case 'P':
+                    listAllPayments();
+                    break;
+                case 'r':
+                case 'R':
+                    Reports.reportsOperation();
+                    break;
+                case 'h':
+                case 'H':
+                    Main.mainMenu();
+                    break;
+                case'X':
+                case'x':
+                    running=false;
+                    System.out.println("Thank you for using LedgerLink, Good bye!!! ");
+                    break;
+                default:
+                    System.out.println("You entered a wrong input!");
+                    break;
+            }
         }
     }
 
     public static void listAllTransactions(){
         List<Transaction>transactions = readTransactionCsv();
+        System.out.println(Transaction.header());
         for(Transaction transaction:transactions){
             System.out.println(transaction);
         }
@@ -51,6 +61,7 @@ public class Ledger {
 
     public static void listAllDeposits(){
         List<Transaction>transactions = readTransactionCsv();
+        System.out.println(Transaction.header());
         for(Transaction transaction:transactions){
             if(transaction.getAmount()>0){
                 System.out.println(transaction);
@@ -61,6 +72,7 @@ public class Ledger {
 
     public static void listAllPayments(){
         List<Transaction>transactions = readTransactionCsv();
+        System.out.println(Transaction.header());
         for(Transaction transaction:transactions){
             if(transaction.getAmount()<0){
                 System.out.println(transaction);

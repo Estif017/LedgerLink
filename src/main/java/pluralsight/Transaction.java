@@ -1,4 +1,4 @@
-package com.pluralsight;
+package pluralsight;
 
 import java.sql.Time;
 import java.time.LocalDate;
@@ -60,15 +60,16 @@ public class Transaction {
         this.amount = amount;
     }
 
+    public static String header() {
+        return String.format("%-12s | %-25s | %10s", "Date", "Description", "Amount");
+    }
+
     @Override
     public String toString() {
-        return "Transaction{" +
-                "date=" + date +
-                ", time=" + time +
-                ", description='" + description + '\'' +
-                ", vendor='" + vendor + '\'' +
-                ", amount=" + amount +
-                '}';
+        return String.format( "%-12s | %-25s | %10.2f",
+                date,
+                description,
+                amount);
     }
 }
 

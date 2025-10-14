@@ -1,4 +1,4 @@
-package com.pluralsight;
+package pluralsight;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,42 +11,55 @@ import java.util.*;
 
 public class Diposits {
     static Scanner scanner = new Scanner(System.in);
-    public static void AddDiposit(){
+    public static void AddDeposit(){
         ArrayList<Transaction> depositList = new ArrayList<>();
         System.out.print("what is this deposit for? ");
         String discription = scanner.nextLine();
         System.out.print("Who is making the deposit? ");
         String vendor = scanner.nextLine();
-        System.out.print("Enter the deposit amount: ");
-        double amount = scanner.nextDouble();
-        scanner.nextLine();
+        double amount = readDouble(scanner, "Enter the deposit amount: ");
+        amount = validateAmount(amount,true);
         Transaction transaction = new Transaction(LocalDate.now(), LocalTime.now(),discription,vendor,amount);
         depositList.add(0,transaction);
         writeFile(transaction);
     }
 
+    // prevent from crashing the app  on string input
+    public static double readDouble(Scanner scanner1 , String message){
+        while (true){
+            System.out.print(message);
+            String input = scanner1.nextLine();
+            try{
+                return Double.parseDouble(input);
+            }catch (NumberFormatException e){
+                System.out.println("❌ Invalid number! Please enter a valid value.");
+            }
+        }
+    }
+
+    public static double validateAmount(double amount, boolean shouldBePositive){
+        while (true){
+            if(shouldBePositive && amount > 0){
+                return amount;
+            } else if (!shouldBePositive && amount < 0) {
+                return amount;
+            }else{
+                System.out.println(shouldBePositive?"❌ Invalid input. Please enter a positive amount. ":"❌ Invalid input. Please enter a negative amount. ");
+                System.out.print("Enter amount again: ");
+                amount = scanner.nextDouble();
+            }
+        }
+    }
+
     public static void makePayment(){
         ArrayList<Transaction> transactions = new ArrayList<>();
         System.out.print("what is the payment for? ");
-        String desctiption = scanner.nextLine();
+        String description = scanner.nextLine();
         System.out.print("Who is being paid? ");
         String vendor = scanner.nextLine();
-        System.out.print("How much is being paid? (please enter a negative amount) ");
-        double amount = scanner.nextDouble();
-        boolean amountValidation;
-        if(amount>0){
-            amountValidation = false;
-            while (!amountValidation){
-                System.out.println("Debt can't be a postive number please enter a negative amount");
-                System.out.print("How much is being paid? (please enter a negative amount) ");
-                 amount = scanner.nextDouble();
-                 if(amount<0){
-                     amountValidation=true;
-                 }
-            }
-        }
-        scanner.nextLine();
-        Transaction transaction = new Transaction(LocalDate.now(), LocalTime.now(),desctiption,vendor,amount);
+        double amount = readDouble(scanner,"How much is being paid? (please enter a negative amount) ");
+        amount = validateAmount(amount,false);
+        Transaction transaction = new Transaction(LocalDate.now(), LocalTime.now(),description,vendor,amount);
         transactions.add(0,transaction);
         writeFile(transaction);
 
