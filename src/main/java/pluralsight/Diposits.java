@@ -37,6 +37,7 @@ public class Diposits {
         }
     }
 
+    //verify if the input should positive or negative
     public static double validateAmount(double amount, boolean shouldBePositive){
         while (true){
             if(shouldBePositive && amount > 0){

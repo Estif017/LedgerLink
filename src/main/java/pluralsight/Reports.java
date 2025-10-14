@@ -117,15 +117,8 @@ public class Reports {
 
         List<Transaction> transactions = Ledger.readTransactionCsv();
 
-        Double minimum = null;
-        Double maximum = null;
-
-        if(!minimumInput.isEmpty()){
-            minimum = Double.parseDouble(minimumInput);
-        }
-        if(!maximumInput.isEmpty()){
-            maximum = Double.parseDouble(maximumInput);
-        }
+        Double minimum = parseSafeDouble(minimumInput);
+        Double maximum = parseSafeDouble(maximumInput);
 
         System.out.println("\n--- Filtered Transactions by Amount ---");
         System.out.println(Transaction.header());
@@ -139,5 +132,19 @@ public class Reports {
             }
         }
         reportsOperation();
+    }
+
+    // make sure it returns null when entering string
+    public static Double parseSafeDouble(String input){
+        if(input==null || input.isEmpty()){
+            return null;
+        }
+
+        try{
+            return Double.parseDouble(input);
+        }catch (NumberFormatException e){
+            System.out.println("Invalid number format. Ignoring input: "+input);
+            return null;
+        }
     }
 }
