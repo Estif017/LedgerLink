@@ -54,4 +54,19 @@ public class HomeScreen {
         System.out.println(BOLD + "0)" + RESET + " Back");
         System.out.print("Enter your option: ");
     }
+
+    public static void sortingMenu(){
+        final String BOLD = "\u001B[1m";
+        final String RESET = "\u001B[0m";
+
+        System.out.println("Please choose sorting order:");
+        System.out.println();
+        System.out.println(BOLD + "O)" + RESET + " Oldest");
+        System.out.println(BOLD + "N)" + RESET + " Newest");
+        System.out.println(BOLD + "H)" + RESET + " Highest");
+        System.out.println(BOLD + "L)" + RESET + " Lowest");
+        System.out.println(BOLD + "B)" + RESET + " Back");
+        System.out.print("Enter your option: ");
+    }
+
 }

@@ -40,10 +40,19 @@ public class Ledger {
 
     public static void listAllTransactions(){
         List<Transaction>transactions = readTransactionCsv();
+
+        HomeScreen.sortingMenu();
+        String input = scanner.nextLine();
+
+        SortOption  sortOption = SortOption.formString(input);
+        if(sortOption==null) sortOption = SortOption.NEWEST;
+        Sorting.sortTransaction(transactions,sortOption);
+
         System.out.println(Transaction.header());
         for(Transaction transaction:transactions){
             System.out.println(transaction);
         }
+
         legerOperation();
     }
 
