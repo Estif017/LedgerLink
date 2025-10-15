@@ -13,14 +13,14 @@ public class Main {
         while(running){
             HomeScreen.showHomeScreen();
             String input = scanner.nextLine().trim();
-            MainMenuOptions option = MainMenuOptions.fromString(input);
+            MainMenuOptions option = MainMenuOptions.fromString(input);//
             if(option==null){
                 System.out.println("Invalid option. Please try again!");
                 continue;
             }
             switch (option){
-                case DEPOSIT -> Diposits.AddDeposit();
-                case PAYMENT -> Diposits.makePayment();
+                case DEPOSIT -> Deposits.AddDeposit();
+                case PAYMENT -> Deposits.makePayment();
                 case LEDGER -> Ledger.legerOperation();
                 case EXIT -> {
                     running = false;

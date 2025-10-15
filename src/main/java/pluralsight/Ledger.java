@@ -10,6 +10,9 @@ import java.util.Scanner;
 
 public class Ledger {
     static Scanner scanner= new Scanner(System.in);
+    /**
+     * Main loop for the Ledger menu (All, Deposits, Payments, Reports, Home, Exit).
+     */
     public static void legerOperation(){
 
         boolean running = true;
@@ -41,7 +44,7 @@ public class Ledger {
     public static void listAllTransactions(){
         List<Transaction>transactions = readTransactionCsv();
 
-        HomeScreen.sortingMenu();
+        HomeScreen.sortingMenu();//calling the menu options
         String input = scanner.nextLine();
 
         SortOption  sortOption = SortOption.formString(input);

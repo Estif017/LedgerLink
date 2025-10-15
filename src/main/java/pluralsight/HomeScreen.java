@@ -3,8 +3,8 @@ package pluralsight;
 public class HomeScreen {
 
     public static void showHomeScreen(){
-        final String BOLD = "\u001B[1m";
-        final String RESET = "\u001B[0m";
+        final String BOLD = "\u001B[1m"; // to make it bold
+        final String RESET = "\u001B[0m"; // reset the font
 
         System.out.println("Please select one of the following options:");
         System.out.println();
