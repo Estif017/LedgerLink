@@ -18,6 +18,8 @@ public enum LegerMenuOptions {
         return code;
     }
 
+
+    //converts user input string into the corresponding enum value
     public static LegerMenuOptions fromString(String input){
         if(input == null) return null;
         input = input.trim().toUpperCase();
