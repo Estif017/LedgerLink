@@ -50,7 +50,9 @@ LedgerLink is a command-line Java application that allows users to track financi
 
 ## 🧠 Interesting Code Snippet
 
-This code help the user to enter only a valid and correct input and prevents from crashing:
+### ✅ Robust Input Validation
+
+Ensures users enter only valid numerical values, preventing runtime crashes:
 
 ```java
 public static double readDouble(Scanner scanner1 , String message){
@@ -64,7 +66,11 @@ public static double readDouble(Scanner scanner1 , String message){
             }
         }
     }
-    
+   ```
+### ✅ Enforcing Correct Amount Signs
+
+Prevents users from entering negative deposits or positive payments:
+```java
 public static double validateAmount(double amount, boolean shouldBePositive){
     while (true){
         if(shouldBePositive && amount > 0){//verifies if deposit and mount is not negative
@@ -78,8 +84,9 @@ public static double validateAmount(double amount, boolean shouldBePositive){
     }
 }
 ```
+### ✅ Enum Conversion
+Converts user input (e.g., "a" or "D") to a corresponding enum value, improving code clarity and maintainability:
 
-This method convert a user’s input string (like "a" or "D") into the corresponding enum value
 ```java
 public static LegerMenuOptions fromString(String input){
         if(input == null) return null;
@@ -92,8 +99,9 @@ public static LegerMenuOptions fromString(String input){
         return null; // invalid option
     }
 ```
+### ✅ Clean and Flexible Sorting
+Uses Java’s Comparator and lambda expressions for elegant, reusable transaction sorting:
 
-Comparator and sort makes my code clean and well functional
 ```java
 switch (option){
             case OLDEST -> transactions.sort(
