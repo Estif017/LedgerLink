@@ -61,14 +61,18 @@ public class Transaction {
     }
 
     public static String header() {
-        return String.format("%-12s | %-25s | %10s", "Date", "Description", "Amount");
+        String header = String.format("%-12s | %-25s | %-20s | %10s",
+                "Date", "Description", "Vendor", "Amount");
+        String separator = "-".repeat(12 + 25 + 20 + 10 + 9); // column widths + separators
+        return header + "\n" + separator;
     }
 
     @Override
     public String toString() {
-        return String.format( "%-12s | %-25s | %10.2f",
+        return String.format( "%-12s | %-25s | %-20s | %10.2f",
                 date,
                 description,
+                vendor,
                 amount);
     }
 }
